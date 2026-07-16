@@ -20,5 +20,4 @@ public class User {
         System.out.println("enter gender: ");
         gender= sc.nextLine();
     }
-
 }

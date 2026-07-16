@@ -30,4 +30,6 @@ bin/
 .DS_Store
 
 .idea
-WhoTFAmI.iml
+*.iml
+target/
+*userProfile*.txt
