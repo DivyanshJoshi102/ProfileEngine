@@ -42,7 +42,7 @@ public class GeminiClient {
             ]
         }
         """.formatted(escapedPrompt);
-        System.out.println("[GeminiClient] Sending Prompt: " + sendJsonPrompt);
+        //System.out.println("[GeminiClient] Sending Prompt: " + sendJsonPrompt);
 
 
         /*
@@ -57,12 +57,12 @@ public class GeminiClient {
                 .header("x-goog-api-key", apiKey)
                 .POST(HttpRequest.BodyPublishers.ofString(sendJsonPrompt))
                 .build();
-        System.out.println("[GeminiClient] HTTP Request: " + request);
+        //System.out.println("[GeminiClient] HTTP Request: " + request);
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println("[GeminiClient] Response Body:" + response.body());//hello ka ai ka jawab
-        System.out.println("[GeminiClient] Response Status Code:" + response.statusCode()); //200
+        //System.out.println("[GeminiClient] Response Body:" + response.body());//hello ka ai ka jawab
+        //System.out.println("[GeminiClient] Response Status Code:" + response.statusCode()); //200
         return response.body();
 
     }

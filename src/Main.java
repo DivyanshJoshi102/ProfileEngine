@@ -34,8 +34,9 @@ public class Main {
             GeminiClient geminiClient = new GeminiClient(apiKey);
             String promptResponse = geminiClient.sendPrompt(prompt); // stores the ai response to prompt
             ParseResponse parseResponse = new ParseResponse();
-            parseResponse.identifyTraitsAndUserDetails(promptResponse);
-
+            ResponseStoredAfterParsing responseStoredAfterParsing = parseResponse.identifyTraitsAndUserDetails(promptResponse);
+            StoreProfile storeProfile = new StoreProfile();
+            storeProfile.profileStore(responseStoredAfterParsing.candidates.get(0).content.parts.get(0).text);
         }
     }
 }
