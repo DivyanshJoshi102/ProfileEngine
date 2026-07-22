@@ -1,20 +1,21 @@
+import org.json.JSONObject;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 public class StoreProfile {
 
     void profileStore(String geminiResponseOfPrompt){
+        JSONObject profileJson = new JSONObject(geminiResponseOfPrompt);
+        JSONObject superhero = profileJson.getJSONObject("superhero");
+        String superheroName = superhero.getString("name");
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("dd-MM-yy_H-m_");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
         String dateTime = time.format(dateTimeFormatter1);
-        File storeProfile = new File(dateTime+"userProfile.txt");
+        File storeProfile = new File("data/UserProfile/" + dateTime + superheroName+".txt");
         try {
             storeProfile.createNewFile();
         }
@@ -24,7 +25,7 @@ public class StoreProfile {
         }
 
         try{
-            FileWriter fileWriter = new FileWriter(dateTime+"userProfile.txt");
+            FileWriter fileWriter = new FileWriter("data/UserProfile/" +dateTime+ superheroName+".txt");
             fileWriter.write(geminiResponseOfPrompt);
             fileWriter.close();
         }

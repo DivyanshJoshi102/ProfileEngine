@@ -32,4 +32,4 @@ bin/
 .idea
 *.iml
 target/
-*userProfile*.txt
+data/UserProfile/
