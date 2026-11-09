@@ -9,10 +9,11 @@ public class User {
     String gender;
 
 
-    void inputName(){
+    String inputName(){
         Scanner sc = new Scanner(System.in);
         System.out.println("enter name: ");
         name= sc.nextLine();
+        return name;
     }
 
     void inputGender(){
