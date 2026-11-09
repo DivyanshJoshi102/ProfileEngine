@@ -27,16 +27,16 @@ public class ChoiceGivenToUser {
 
     void takingQuiz() {
         User user = new User();
-        user.inputName();
+        String nameOfUser = user.inputName();
         user.inputGender();
         Quiz quiz = new Quiz();
         quiz.setQuestions();
         quiz.inputAnswers();
         PromptEngine promptEngine = new PromptEngine();
         String prompt = promptEngine.promptGenerator(user, quiz); // stores the prompt sent to ai
-        creatingUserProfile(prompt);
+        creatingUserProfile(prompt, nameOfUser);
     }
-    void creatingUserProfile(String prompt){
+    void creatingUserProfile(String prompt, String nameOfUser){
         //geminiclient is sending prompt to ai
         final String apiKey = System.getenv("GEMINI_API_KEY");// api key to access gemini ai model
         if (apiKey == null) {
@@ -51,7 +51,10 @@ public class ChoiceGivenToUser {
             }
             ParseResponse parseResponse = new ParseResponse();
             ResponseStoredAfterParsing responseStoredAfterParsing = parseResponse.identifyTraitsAndUserDetails(promptResponse);
-            StoreProfile storeProfile = new StoreProfile();
+            StoreProfileInDatabase storeProfileInDatabase = new StoreProfileInDatabase();//storing data in database
+            storeProfileInDatabase.insertingDataInDb(responseStoredAfterParsing.candidates.get(0).content.parts.get(0).text, nameOfUser);
+
+            StoreProfile storeProfile = new StoreProfile();//storing data in file
             storeProfile.profileStore(responseStoredAfterParsing.candidates.get(0).content.parts.get(0).text);
         }
     }
