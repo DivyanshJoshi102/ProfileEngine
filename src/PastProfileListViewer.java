@@ -48,6 +48,8 @@ public class PastProfileListViewer {
          else{
              System.out.println("Did not enter valid serial number");
          }
+        ReadProfileFromDatabase readProfileFromDatabase = new ReadProfileFromDatabase();
+        readProfileFromDatabase.pastProfileList();
     }
 
     int inputProfileSerialNumber(){
